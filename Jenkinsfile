@@ -45,7 +45,7 @@ pipeline {
         }
         steps {
           dir ('foo'){
-            checkout scm
+            git 'https://github.com/rawlingsj/prow-demo11.git'
             sh 'pwd'
             sh "ls -al"
             sleep 10
