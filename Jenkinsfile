@@ -45,7 +45,7 @@ pipeline {
         }
         steps {
           
-            git "https://github.com/$ORG/$APP_NAME.git"
+            git 'https://github.com/rawlingsj/prow-demo11.git'
 
             //sh "git checkout master"
             
