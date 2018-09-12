@@ -45,9 +45,9 @@ pipeline {
         }
         steps {
           
-            git 'https://github.com/rawlingsj/prow-demo11.git'
+            git "https://github.com/$ORG/$APP_NAME.git"
 
-            sh "git checkout master"
+            //sh "git checkout master"
             
             sh "git config --global credential.helper store"
 
