@@ -45,6 +45,7 @@ pipeline {
         }
         steps {
             sh "ls -al"
+            input 'ok'
             sh "git status"
             sh "git checkout master"
             
@@ -55,7 +56,7 @@ pipeline {
             sh "echo \$(jx-release-version) > VERSION"
             // ensure we're not on a detached head
             
-            input 'ok'
+            
             sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
 
             dir ('./charts/prow-demo11') {
