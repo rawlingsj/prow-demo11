@@ -42,12 +42,12 @@ pipeline {
       }
       stage('Build Release') {
         when {
-          expression { env.BRANCH_NAME == 'master' }
+          branch 'master'
         }
         steps {
 
             // ensure we're not on a detached head
-            sh "git checkout master"
+            //sh "git checkout master"
             sh "git config --global credential.helper store"
 
             sh "jx step git credentials"
@@ -56,18 +56,13 @@ pipeline {
             sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
 
           dir ('./charts/prow-demo11') {
-
               sh "make tag"
-
           }
-          container('maven') {
-            sh 'mvn clean deploy'
-
-            sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
-
-
-            sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
-          }
+          
+          sh 'mvn clean deploy'
+          sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
+          sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
+          
         }
       }
       stage('Promote to Environments') {
