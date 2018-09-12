@@ -42,10 +42,10 @@ pipeline {
       }
       stage('Build Release') {
         when {
-          branch 'master'
+          branch 'master' }
         }
         steps {
-
+            input 'ok'
             // ensure we're not on a detached head
             //sh "git checkout master"
             sh "git config --global credential.helper store"
