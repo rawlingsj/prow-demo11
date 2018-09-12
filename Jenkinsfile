@@ -45,9 +45,11 @@ pipeline {
         }
         steps {
             sh "ls -al"
-            sleep 5
+            sleep 10
             sh "ls -al"
+
             input 'ok'
+            
             sh "git status"
             sh "git checkout master"
             
