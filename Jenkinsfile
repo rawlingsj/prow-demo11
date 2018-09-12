@@ -45,7 +45,7 @@ pipeline {
           branch 'master' }
         }
         steps {
-            input 'ok'
+            input "ok"
             // ensure we're not on a detached head
             //sh "git checkout master"
             sh "git config --global credential.helper store"
