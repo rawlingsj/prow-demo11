@@ -44,12 +44,13 @@ pipeline {
           branch 'master'
         }
         steps {
+            sh 'pwd'
             sh "ls -al"
             sleep 10
             sh "ls -al"
 
             input 'ok'
-            
+
             sh "git status"
             sh "git checkout master"
             
