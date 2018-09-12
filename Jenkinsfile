@@ -44,6 +44,7 @@ pipeline {
           branch 'master'
         }
         steps {
+            checkout scm
             sh 'pwd'
             sh "ls -al"
             sleep 10
