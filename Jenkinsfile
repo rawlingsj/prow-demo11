@@ -44,16 +44,9 @@ pipeline {
           branch 'master'
         }
         steps {
-          dir ('foo'){
+          
             git 'https://github.com/rawlingsj/prow-demo11.git'
-            sh 'pwd'
-            sh "ls -al"
-            sleep 10
-            sh "ls -al"
 
-            input 'ok'
-
-            sh "git status"
             sh "git checkout master"
             
             sh "git config --global credential.helper store"
@@ -73,7 +66,7 @@ pipeline {
             sh 'mvn clean deploy'
             sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
-          }
+          
 
 
         }
