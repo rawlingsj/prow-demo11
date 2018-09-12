@@ -44,15 +44,18 @@ pipeline {
           branch 'master'
         }
         steps {
-
-            input 'ok'
-            // ensure we're not on a detached head
+            sh "ls -al"
+            sh "git status"
             sh "git checkout master"
+            
             sh "git config --global credential.helper store"
 
             sh "jx step git credentials"
             // so we can retrieve the version in later steps
             sh "echo \$(jx-release-version) > VERSION"
+            // ensure we're not on a detached head
+            
+            input 'ok'
             sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
 
             dir ('./charts/prow-demo11') {
