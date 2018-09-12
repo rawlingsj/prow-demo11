@@ -35,7 +35,7 @@ pipeline {
       }
       stage('Build Release') {
         when {
-          branch 'master'
+          expression { env.BRANCH_NAME == 'master' }
         }
         steps {
 
